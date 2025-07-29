@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gene Logo Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .example {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gene Logo Generator</h1>
+        
+        <form method="GET" action="/">
+            <div class="form-group">
+                <label for="name">Enter Gene Name:</label>
+                <input type="text" id="name" name="name" value="{{ name or '' }}" placeholder="e.g., BRCA1, TP53, EGFR">
+            </div>
+            <button type="submit">Generate Logo</button>
+        </form>
+        
+        {% if name %}
+        <div class="result">
+            <h2>Logo for Gene: {{ name }}</h2>
+            <img src="/logo/{{ name }}.png" alt="Gene logo for {{ name }}" style="max-width: 100%; border: 1px solid #ddd;">
+        </div>
+        {% endif %}
+        
+        <div class="example">
+            <h3>About This Tool</h3>
+            <p>This tool generates sequence logos for genes by:</p>
+            <ul>
+                <li>Fetching genetic variants (SNPs) from the UCSC genome database</li>
+                <li>Retrieving the corresponding DNA sequence from Ensembl</li>
+                <li>Creating a visual representation showing sequence conservation and variation</li>
+            </ul>
+            <p><strong>Example genes to try:</strong> BRCA1, TP53, EGFR, KRAS</p>
+        </div>
+    </div>
+</body>
+</html>
